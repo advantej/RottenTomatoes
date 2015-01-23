@@ -7,6 +7,7 @@
 //
 
 #import "MovieCell.h"
+#import "UIImageView+AFNetworking.h"
 
 @implementation MovieCell
 
@@ -19,5 +20,18 @@
 
     // Configure the view for the selected state
 }
+
+- (void)bindData:(NSDictionary *)movieDict {
+
+    self.titleLabel.text = movieDict[@"title"];
+    self.snippetLabel.text = movieDict[@"synopsis"];
+
+    NSDictionary *postersDict = movieDict[@"posters"];
+    NSString *urlString = postersDict[@"thumbnail"];
+    //NSString *urlString = [movie valueForKey:@"posters.thumbnail"];
+    NSURL *movieImageUrl = [NSURL URLWithString:urlString];
+    [self.movieImage setImageWithURL:movieImageUrl];
+}
+
 
 @end

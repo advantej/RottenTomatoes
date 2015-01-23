@@ -9,11 +9,14 @@
 #import "MovieViewController.h"
 #import "MovieCell.h"
 #import "UIImageView+AFNetworking.h"
+#import "MovieDetailViewController.h"
 
 @interface MovieViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (strong, nonatomic) NSArray *movies;
+
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @end
 
@@ -25,17 +28,29 @@
 
     self.title = @"Movies";
 
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=dagqdghwaq3e3mxyrp7kmmj5&limit=20&country=us"]];
-    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        id object = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        self.movies = object[@"movies"];
-        [self.tableView reloadData];
-    }];
+
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(onRefresh) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:self.refreshControl atIndex:0];
 
     self.tableView.dataSource = self;
     self.tableView.rowHeight = 146;
+    self.tableView.delegate = self;
 
     [self.tableView registerNib:[UINib nibWithNibName:@"MovieCell" bundle:nil] forCellReuseIdentifier:@"MovieCell"];
+
+    [self onRefresh];
+}
+
+- (void)onRefresh {
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=dagqdghwaq3e3mxyrp7kmmj5&limit=20&country=us"]];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+
+        id object = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        self.movies = object[@"movies"];
+        [self.tableView reloadData];
+        [self.refreshControl endRefreshing];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -48,31 +63,18 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
     MovieCell *movieCell = [tableView dequeueReusableCellWithIdentifier:@"MovieCell"];
-
-    NSDictionary *movie = self.movies[indexPath.row];
-
-    movieCell.titleLabel.text = movie[@"title"];
-    movieCell.snippetLabel.text = movie[@"synopsis"];
-
-    NSDictionary *postersDict = movie[@"posters"];
-    NSString *urlString = postersDict[@"thumbnail"];
-    //NSString *urlString = [movie valueForKey:@"posters.thumbnail"];
-    NSURL *movieImageUrl = [NSURL URLWithString:urlString];
-    [movieCell.movieImage setImageWithURL:movieImageUrl];
-
+    [movieCell bindData:self.movies[indexPath.row]];
     return movieCell;
 }
 
-/*
-#pragma mark - Navigation
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    MovieDetailViewController *movieDetailViewController = [[MovieDetailViewController alloc] init];
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    movieDetailViewController.movieDict = self.movies[indexPath.row];
+
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self.navigationController pushViewController:movieDetailViewController animated:YES];
 }
-*/
 
 @end
