@@ -17,6 +17,7 @@
 @property (strong, nonatomic) NSArray *movies;
 
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
+@property (weak, nonatomic) IBOutlet UILabel *networkErrorLabel;
 
 @end
 
@@ -27,6 +28,8 @@
     // Do any additional setup after loading the view from its nib.
 
     self.title = @"Movies";
+    
+    [self.networkErrorLabel setHidden:YES];
 
 
     self.refreshControl = [[UIRefreshControl alloc] init];
@@ -47,6 +50,16 @@
     [SVProgressHUD show];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
 
+        if (connectionError != nil) {
+            
+            [self.networkErrorLabel setHidden:NO];
+            
+            [self.refreshControl endRefreshing];
+            [SVProgressHUD dismiss];
+            return;
+        }
+        
+        [self.networkErrorLabel setHidden:YES];
         id object = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
         self.movies = object[@"movies"];
         [self.tableView reloadData];
