@@ -131,9 +131,9 @@
 }
 
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    [self.movieSearchBar resignFirstResponder];
-}
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    [self.movieSearchBar resignFirstResponder];
+//}
 
 - (void)performSearch:(NSString *)searchText {
 
