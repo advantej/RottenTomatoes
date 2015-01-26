@@ -8,6 +8,7 @@
 
 #import "MovieDetailViewController.h"
 #import "UIImageView+AFNetworkingFadeInAdditions.h"
+#import "FullScreenImageViewController.h"
 
 @interface MovieDetailViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *moviePoster;
@@ -50,8 +51,22 @@
 //    [self.moviePoster setImageWithURL:[NSURL URLWithString:urlString]];
 
 
-    [self.moviePoster setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:self.imagePlaceholder fadeInWithDuration:0.8f];
+    [self.moviePoster setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:self.imagePlaceholder fadeInWithDuration:0.4f];
 
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewTapped:)];
+    singleTap.numberOfTapsRequired = 1;
+    singleTap.numberOfTouchesRequired = 1;
+    [self.moviePoster addGestureRecognizer:singleTap];
+    [self.moviePoster setUserInteractionEnabled:YES];
+
+
+}
+
+- (void)imageViewTapped:(id)imageViewTapped {
+
+    FullScreenImageViewController *fullScreenImageViewController = [[FullScreenImageViewController alloc] init];
+    fullScreenImageViewController.imageMovieImage = [self.moviePoster image];
+    [self.navigationController pushViewController:fullScreenImageViewController animated:NO];
 
 }
 
