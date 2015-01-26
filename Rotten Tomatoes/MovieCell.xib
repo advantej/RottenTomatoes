@@ -33,7 +33,7 @@
                     </label>
                 </subviews>
             </tableViewCellContentView>
-            <color key="backgroundColor" red="1" green="0.95594983967750513" blue="0.72079889649174911" alpha="0.66000000000000003" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="1" green="0.63481499080000003" blue="0.18318690839999999" alpha="0.33000000000000002" colorSpace="calibratedRGB"/>
             <connections>
                 <outlet property="movieImage" destination="6vB-2K-WTj" id="Lhb-Rd-Bgs"/>
                 <outlet property="snippetLabel" destination="o3i-dg-okw" id="RPg-t3-tnj"/>

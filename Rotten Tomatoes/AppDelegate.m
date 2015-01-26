@@ -23,6 +23,8 @@
     MovieViewController *vc = [[MovieViewController alloc] init];
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:vc];
+    navigationController.navigationBar.barTintColor = [UIColor colorWithRed:245.0/255.0 green:159.0/255.0 blue:0.0/255.0 alpha:1];
+    navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
 
     self.window.rootViewController = navigationController;
     [self.window makeKeyAndVisible];
