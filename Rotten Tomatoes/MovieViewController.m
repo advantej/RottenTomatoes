@@ -102,6 +102,8 @@
     MovieDetailViewController *movieDetailViewController = [[MovieDetailViewController alloc] init];
 
     movieDetailViewController.movieDict = self.movies[indexPath.row];
+    MovieCell *cell = (MovieCell *) [tableView cellForRowAtIndexPath:indexPath];
+    movieDetailViewController.imagePlaceholder = [cell.movieImage image];
 
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.navigationController pushViewController:movieDetailViewController animated:YES];

@@ -19,6 +19,7 @@
 		8BA8BAEC1A6F544A00AEC115 /* Rotten_TomatoesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BA8BAEB1A6F544A00AEC115 /* Rotten_TomatoesTests.m */; };
 		8BA8BAF81A6F54FC00AEC115 /* MovieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BA8BAF61A6F54FC00AEC115 /* MovieViewController.m */; };
 		8BA8BAF91A6F54FC00AEC115 /* MovieViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BA8BAF71A6F54FC00AEC115 /* MovieViewController.xib */; };
+		D527ABDFE1A5E92C6E03DDAB /* UIImageView+AFNetworkingFadeInAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D527A6509D7FC9E28890E2B2 /* UIImageView+AFNetworkingFadeInAdditions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,8 @@
 		8BA8BAF51A6F54FC00AEC115 /* MovieViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieViewController.h; sourceTree = "<group>"; };
 		8BA8BAF61A6F54FC00AEC115 /* MovieViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieViewController.m; sourceTree = "<group>"; };
 		8BA8BAF71A6F54FC00AEC115 /* MovieViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MovieViewController.xib; sourceTree = "<group>"; };
+		D527A0F167BB9C7D72ECF66E /* UIImageView+AFNetworkingFadeInAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworkingFadeInAdditions.h"; sourceTree = "<group>"; };
+		D527A6509D7FC9E28890E2B2 /* UIImageView+AFNetworkingFadeInAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworkingFadeInAdditions.m"; sourceTree = "<group>"; };
 		E045BD58BC8953BFD6156102 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -129,6 +132,8 @@
 				8B4F00A61A71A7E3007BE5A8 /* MovieDetailViewController.h */,
 				8B4F00A71A71A7E3007BE5A8 /* MovieDetailViewController.m */,
 				8B4F00A81A71A7E3007BE5A8 /* MovieDetailViewController.xib */,
+				D527A6509D7FC9E28890E2B2 /* UIImageView+AFNetworkingFadeInAdditions.m */,
+				D527A0F167BB9C7D72ECF66E /* UIImageView+AFNetworkingFadeInAdditions.h */,
 			);
 			path = "Rotten Tomatoes";
 			sourceTree = "<group>";
@@ -301,6 +306,7 @@
 				8B4F00A91A71A7E3007BE5A8 /* MovieDetailViewController.m in Sources */,
 				8B60693A1A7086A3000E824F /* MovieCell.m in Sources */,
 				8BA8BAD21A6F544A00AEC115 /* main.m in Sources */,
+				D527ABDFE1A5E92C6E03DDAB /* UIImageView+AFNetworkingFadeInAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

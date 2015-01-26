@@ -11,5 +11,6 @@
 @interface MovieDetailViewController : UIViewController
 
 @property (strong, nonatomic) NSDictionary *movieDict;
+@property (strong, nonatomic) UIImage *imagePlaceholder;
 
 @end

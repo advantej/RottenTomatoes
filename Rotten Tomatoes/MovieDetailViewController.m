@@ -7,7 +7,7 @@
 //
 
 #import "MovieDetailViewController.h"
-#import "UIImageView+AFNetworking.h"
+#import "UIImageView+AFNetworkingFadeInAdditions.h"
 
 @interface MovieDetailViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *moviePoster;
@@ -27,6 +27,8 @@
     
     self.movieDetailScrollView.contentSize = CGSizeMake(320, 400);
 
+    self.moviePoster.image =  self.imagePlaceholder;
+
     self.labelMovieTitle.text = self.movieDict[@"title"];
     
     NSDictionary *ratingsDict = self.movieDict[@"ratings"];
@@ -45,7 +47,11 @@
 
     NSString *urlString = [self.movieDict valueForKeyPath:@"posters.thumbnail"];
     urlString = [urlString stringByReplacingOccurrencesOfString:@"tmb" withString:@"ori"];
-    [self.moviePoster setImageWithURL:[NSURL URLWithString:urlString]];
+//    [self.moviePoster setImageWithURL:[NSURL URLWithString:urlString]];
+
+
+    [self.moviePoster setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:self.imagePlaceholder fadeInWithDuration:0.8f];
+
 
 }
 
