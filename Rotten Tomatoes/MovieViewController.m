@@ -21,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *networkErrorLabel;
 @property (weak, nonatomic) IBOutlet UISearchBar *movieSearchBar;
 
+@property (nonatomic) BOOL shouldBeginEditing;
+
 
 - (void)showNetworkErrorMessage;
 - (void)hideNetworkErrorMessage;
@@ -33,6 +35,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+
+    self.shouldBeginEditing = YES;
 
     self.title = @"Top Movies";
     
@@ -147,7 +151,24 @@
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     NSLog(@"Text %ld", searchText.length);
+
+    if(![searchBar isFirstResponder]) {
+        // user tapped the 'clear' button
+        self.shouldBeginEditing = NO;
+        // do whatever I want to happen when the user clears the search...
+    }
+
+
     [self performSearch:searchText];
+}
+
+
+// http://stackoverflow.com/questions/1092246/uisearchbar-clearbutton-forces-the-keyboard-to-appear/3852509#3852509
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
+    // reset the shouldBeginEditing BOOL ivar to YES, but first take its value and use it to return it from the method call
+    BOOL boolToReturn = self.shouldBeginEditing;
+    self.shouldBeginEditing = YES;
+    return boolToReturn;
 }
 
 
