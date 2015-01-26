@@ -146,7 +146,7 @@
 
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    NSLog(@"Text %d", searchText.length);
+    NSLog(@"Text %ld", searchText.length);
     [self performSearch:searchText];
 }
 

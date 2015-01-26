@@ -11,8 +11,12 @@
 
 @interface MovieDetailViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *moviePoster;
-@property (weak, nonatomic) IBOutlet UILabel *movieDetail;
 @property (weak, nonatomic) IBOutlet UIScrollView *movieDetailScrollView;
+@property (weak, nonatomic) IBOutlet UILabel *labelScore;
+@property (weak, nonatomic) IBOutlet UILabel *labelRatings;
+@property (weak, nonatomic) IBOutlet UILabel *labelMovieTitle;
+@property (weak, nonatomic) IBOutlet UIView *movieInfoContainer;
+@property (weak, nonatomic) IBOutlet UITextView *textViewDetails;
 
 @end
 
@@ -21,14 +25,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.movieDetailScrollView.contentSize = CGSizeMake(320, 1000);
+    self.movieDetailScrollView.contentSize = CGSizeMake(320, 400);
 
-    self.title = self.movieDict[@"title"];
+    self.labelMovieTitle.text = self.movieDict[@"title"];
+    
+    NSDictionary *ratingsDict = self.movieDict[@"ratings"];
+    
+    self.labelRatings.text  = [NSString stringWithFormat:@"Critics : %@    Users : %@", ratingsDict[@"critics_rating"], ratingsDict[@"audience_rating"]];
+    self.labelScore.text  = [NSString stringWithFormat:@"Critics : %@    Users : %@", ratingsDict[@"critics_score"], ratingsDict[@"audience_score"]];
 
-    self.movieDetail.text = self.movieDict[@"synopsis"];
+    
+    self.textViewDetails.text = self.movieDict[@"synopsis"];
+    
 //    CGSize foo = [self.movieDetail sizeThatFits:CGSizeMake(320, 200)];
 //    self.movieDetail.frame = CGRectMake(self.movieDetail.frame.origin.x, self.movieDetail.frame.origin.y, foo.width, foo.height);
-    [self.movieDetail sizeToFit];
+    
+//    [self.movieDetail sizeToFit];
+//    [self.movieInfoContainer sizeToFit];
 
     NSString *urlString = [self.movieDict valueForKeyPath:@"posters.thumbnail"];
     urlString = [urlString stringByReplacingOccurrencesOfString:@"tmb" withString:@"ori"];
@@ -36,12 +49,12 @@
 
 }
 
-- (void)setUILabelTextWithVerticalAlignTop:(NSString *)theText {
-    CGSize labelSize = CGSizeMake(300, 500);
-    CGSize theStringSize = [theText sizeWithFont:self.movieDetail.font constrainedToSize:labelSize lineBreakMode:self.movieDetail.lineBreakMode];
-    self.movieDetail.frame = CGRectMake(self.movieDetail.frame.origin.x, self.movieDetail.frame.origin.y, theStringSize.width, theStringSize.height);
-    self.movieDetail.text = theText;
-}
+//- (void)setUILabelTextWithVerticalAlignTop:(NSString *)theText {
+//    CGSize labelSize = CGSizeMake(300, 500);
+//    CGSize theStringSize = [theText sizeWithFont:self.movieDetail.font constrainedToSize:labelSize lineBreakMode:self.movieDetail.lineBreakMode];
+//    self.movieDetail.frame = CGRectMake(self.movieDetail.frame.origin.x, self.movieDetail.frame.origin.y, theStringSize.width, theStringSize.height);
+//    self.movieDetail.text = theText;
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
