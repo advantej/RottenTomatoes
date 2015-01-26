@@ -11,5 +11,6 @@
 @interface FullScreenImageViewController : UIViewController
 
 @property (strong, nonatomic) UIImage *imageMovieImage;
+@property (strong, nonatomic) NSString *imageUrl;
 
 @end

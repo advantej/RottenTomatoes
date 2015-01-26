@@ -19,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UIView *movieInfoContainer;
 @property (weak, nonatomic) IBOutlet UITextView *textViewDetails;
 
+@property (strong, nonatomic) NSString *imageUrlString;
+
 @end
 
 @implementation MovieDetailViewController
@@ -46,12 +48,12 @@
 //    [self.movieDetail sizeToFit];
 //    [self.movieInfoContainer sizeToFit];
 
-    NSString *urlString = [self.movieDict valueForKeyPath:@"posters.thumbnail"];
-    urlString = [urlString stringByReplacingOccurrencesOfString:@"tmb" withString:@"ori"];
-//    [self.moviePoster setImageWithURL:[NSURL URLWithString:urlString]];
+    self.imageUrlString = [self.movieDict valueForKeyPath:@"posters.thumbnail"];
+    self.imageUrlString = [self.imageUrlString stringByReplacingOccurrencesOfString:@"tmb" withString:@"ori"];
+//    [self.moviePoster setImageWithURL:[NSURL URLWithString:imageUrlString]];
 
 
-    [self.moviePoster setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:self.imagePlaceholder fadeInWithDuration:0.4f];
+    [self.moviePoster setImageWithURL:[NSURL URLWithString:self.imageUrlString] placeholderImage:self.imagePlaceholder fadeInWithDuration:0.4f];
 
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewTapped:)];
     singleTap.numberOfTapsRequired = 1;
@@ -65,7 +67,8 @@
 - (void)imageViewTapped:(id)imageViewTapped {
 
     FullScreenImageViewController *fullScreenImageViewController = [[FullScreenImageViewController alloc] init];
-    fullScreenImageViewController.imageMovieImage = [self.moviePoster image];
+    fullScreenImageViewController.imageMovieImage = self.moviePoster.image;
+    fullScreenImageViewController.imageUrl = self.imageUrlString;
     [self.navigationController pushViewController:fullScreenImageViewController animated:NO];
 
 }

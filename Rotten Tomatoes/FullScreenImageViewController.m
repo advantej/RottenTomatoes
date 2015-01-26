@@ -7,6 +7,7 @@
 //
 
 #import "FullScreenImageViewController.h"
+#import "UIImageView+AFNetworkingFadeInAdditions.h"
 
 @interface FullScreenImageViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewMoviePoster;
@@ -18,7 +19,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self.imageViewMoviePoster setImage:self.imageMovieImage];
+    self.imageViewMoviePoster.image = self.imageMovieImage;
+
+    [self.imageViewMoviePoster setImageWithURL:[NSURL URLWithString:self.imageUrl] placeholderImage:self.imageMovieImage fadeInWithDuration:0.4f];
 
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewTapped:)];
     singleTap.numberOfTapsRequired = 1;
